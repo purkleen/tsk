@@ -10,7 +10,7 @@ This script does the same substitution ahead of time, writing assets to disk
 and rewriting the template to point at them, so the result is an ordinary
 directory of files that a static server can host.
 
-Usage: python3 tools/unpack.py sprout.html src
+Usage: python3 tools/unpack.py sprout.html public
 """
 
 import base64
@@ -121,4 +121,4 @@ def main(bundle_path, out_dir):
 
 if __name__ == "__main__":
     main(sys.argv[1] if len(sys.argv) > 1 else "sprout.html",
-         sys.argv[2] if len(sys.argv) > 2 else "src")
+         sys.argv[2] if len(sys.argv) > 2 else "public")
