@@ -21,13 +21,35 @@ the component and asset files.
 
 ```
 sprout.html              original self-extracting bundle (2.9 MB)
-tools/unpack.py          regenerates public/ from the bundle
+tools/unpack.py          regenerates the app files in public/
+
 public/index.html        the app: markup with {{ }} bindings + a DCLogic class
 public/components/       PostCard.dc.html, a sub-component
 public/vendor/           dc-runtime.js, image-slot.js, React 18.3.1 UMD
 public/assets/           post photos (p01–p11) and avatars
 public/fonts/            Fredoka + Nunito woff2, and the @font-face CSS
+
+public/dashboard.html    hand-authored — see below
+public/fonts/fonts.css   hand-authored — latin @font-face rules for it
 ```
+
+## Dashboard
+
+`public/dashboard.html` is a scaffold for a parent home screen, at
+http://localhost:4173/dashboard.html. It holds five widgets: a dismissible
+announcement banner, an events card, a useful-links grid, a fees and payments
+summary, and blog/chat entry points.
+
+It is deliberately *not* built on the DC runtime. `index.html` is generated
+output — 3,500 lines of inline styles and `{{ }}` bindings — so editing it by
+hand is unpleasant and any change is lost on the next unpack. The dashboard is
+plain HTML and CSS with the app's colours, spacing, and shadows named as custom
+properties at the top of the file, so it can be edited directly.
+
+It reuses the app's own font files via `public/fonts/fonts.css` (the latin
+subset lifted from `index.html`, so it adds no download weight) and shares the
+`assets/` images. The phone frame collapses below 520px, so it also works
+full-bleed on a real device.
 
 ## Deploying
 
@@ -61,7 +83,10 @@ static site. Re-run it any time:
 python3 tools/unpack.py sprout.html public
 ```
 
-It is deterministic: the output matches the committed `public/` byte for byte.
+It is deterministic: every file it generates matches the committed copy byte for
+byte. It only ever writes the files it owns, so the two hand-authored files
+listed above survive a re-run — but it will overwrite edits made directly to
+`index.html` or anything else it generates.
 
 ## Notes
 
