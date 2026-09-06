@@ -82,152 +82,148 @@ body {
 
 /* --- header ------------------------------------------------------------- */
 .header {
-  flex-shrink: 0; padding: 60px 20px 14px;
-  background: var(--app-bg); border-bottom: 1px solid rgba(43,37,64,0.05); z-index: 20;
+  flex-shrink: 0; padding: 58px 20px 14px;
+  background: var(--app-bg); z-index: 20;
   display: flex; align-items: center; justify-content: space-between; gap: 10px;
 }
-.greeting { font-size: 12.5px; font-weight: 800; color: var(--ink-3); letter-spacing: 0.3px; }
-.header h1 { font-family: var(--display); font-weight: 600; font-size: 25px; margin-top: 1px; }
+.greeting { font-size: 14px; font-weight: 700; color: var(--ink-2); }
+.header h1 { font-family: var(--display); font-weight: 600; font-size: 27px; line-height: 1.15; }
 .avatar {
-  width: 42px; height: 42px; border-radius: 50%; object-fit: cover;
+  width: 48px; height: 48px; border-radius: 50%; object-fit: cover;
   border: 2px solid var(--surface); box-shadow: var(--shadow-card); flex-shrink: 0;
 }
 
 /* --- scrolling feed ----------------------------------------------------- */
-.feed { flex: 1; overflow-y: auto; padding: 16px 16px 22px; }
+.feed { flex: 1; overflow-y: auto; padding: 6px 16px 22px; }
 .feed::-webkit-scrollbar { width: 0; }
 
 .section-label {
-  display: flex; align-items: center; justify-content: space-between;
-  font-size: 11px; font-weight: 800; text-transform: uppercase;
-  letter-spacing: 0.6px; color: var(--ink-3);
-  margin: 20px 4px 9px;
+  display: flex; align-items: baseline; justify-content: space-between;
+  margin: 22px 4px 10px;
 }
-.section-label a { color: var(--violet); text-decoration: none; font-size: 11.5px; }
+.section-label h2 { font-family: var(--display); font-weight: 600; font-size: 19px; }
+.section-label a { color: var(--violet); text-decoration: none; font-size: 12.5px; font-weight: 800; }
 
-.card {
-  background: var(--surface); border-radius: var(--r-lg);
-  box-shadow: var(--shadow-card); overflow: hidden; margin-bottom: 14px;
-}
-.eyebrow {
-  font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;
-}
-.title-md { font-family: var(--display); font-weight: 600; font-size: 17px; margin-top: 2px; }
-.meta { font-size: 12.5px; font-weight: 700; color: var(--ink-2); margin-top: 2px; }
+.eyebrow { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
+.meta    { font-size: 12.5px; font-weight: 700; color: var(--ink-2); }
 
 .btn {
-  border: none; cursor: pointer; border-radius: var(--r-sm); padding: 12px;
-  font-family: var(--body); font-weight: 800; font-size: 14px;
+  border: none; cursor: pointer; border-radius: var(--r-sm); padding: 11px 14px;
+  font-family: var(--body); font-weight: 800; font-size: 13.5px;
   display: flex; align-items: center; justify-content: center; gap: 6px;
 }
-.btn-primary { background: linear-gradient(150deg, var(--green-lift), var(--green)); color: #fff; }
-.btn-ghost   { background: var(--surface); color: var(--ink); border: 1.5px solid var(--line); }
-.btn-amber   { background: var(--amber-mid); color: #fff; }
-.btn-row     { display: flex; gap: 10px; padding: 13px 16px 15px; }
-.btn-row .btn { flex: 1; }
-
+.btn-amber { background: var(--amber-mid); color: #fff; }
 .dismiss {
-  width: 26px; height: 26px; border-radius: 50%; border: none; cursor: pointer;
-  font-size: 12px; display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0; align-self: flex-start;
-  background: rgba(255,255,255,0.75); color: var(--ink-2);
+  width: 28px; height: 28px; border-radius: 50%; border: none; cursor: pointer;
+  font-size: 13px; display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; background: rgba(255,255,255,0.7); color: var(--ink-2);
 }
 
-/* 1 — BANNER ------------------------------------------------------------- */
-.banner {
-  display: flex; gap: 12px; align-items: flex-start;
-  border-radius: var(--r-md); padding: 15px 14px 15px 16px; margin-bottom: 14px;
+/* === 1 — ANNOUNCEMENT STACK ============================================== */
+/* One card at a time; the layers peeking out below stand for the ones queued
+   behind it, and retract as the queue empties. */
+.stack { position: relative; margin-bottom: 8px; }
+.peek {
+  position: absolute; left: 13px; right: 13px; bottom: -9px; height: 30px;
+  background: var(--surface); border-radius: var(--r-md);
+  box-shadow: var(--shadow-card); z-index: 1;
+}
+.peek.is-second { left: 27px; right: 27px; bottom: -18px; }
+
+.ann {
+  position: relative; z-index: 3;
   background: linear-gradient(135deg, #F3ECFB, #EAF4FC);
-  border: 1.5px solid #E6DEF6;
+  border: 1.5px solid #E6DEF6; border-radius: var(--r-md);
+  padding: 15px 14px 15px 16px;
+  display: flex; gap: 12px; align-items: flex-start;
 }
-.banner .bell { font-size: 22px; line-height: 1.2; flex-shrink: 0; }
-.banner .eyebrow { color: var(--violet); }
-.banner p { font-size: 13.5px; font-weight: 600; color: var(--ink); margin-top: 3px; line-height: 1.45; }
+.ann .glyph { font-size: 22px; line-height: 1.2; flex-shrink: 0; }
+.ann .eyebrow { color: var(--violet); }
+.ann h3 { font-family: var(--display); font-weight: 600; font-size: 16.5px; margin-top: 3px; line-height: 1.3; }
+.ann p  { font-size: 13px; font-weight: 600; color: var(--ink-2); margin-top: 4px; line-height: 1.45; }
+.dots { display: flex; gap: 5px; justify-content: center; padding: 26px 0 0; }
+.dot { width: 6px; height: 6px; border-radius: 50%; background: var(--ink-3); opacity: 0.35; }
+.dot.is-on { opacity: 1; background: var(--violet); width: 18px; border-radius: 3px; }
 
-/* 2 — EVENTS ------------------------------------------------------------- */
-.event-head {
-  display: flex; align-items: center; gap: 13px;
-  padding: 15px 16px 13px; background: linear-gradient(135deg, var(--blue-soft), #F1EBFB);
+/* === 2 — TWO-UP: UPCOMING EVENTS / DUE PAYMENTS ========================== */
+.two-up { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.tile {
+  border-radius: 22px; padding: 15px 15px 16px; min-height: 208px;
+  display: flex; flex-direction: column; text-decoration: none; color: var(--ink);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.tile:hover { transform: translateY(-2px); }
+.tile-events  { background: var(--surface); box-shadow: var(--shadow-card); }
+.tile-payments{ background: var(--amber-soft); border: 1.5px solid var(--amber-line); }
+.tile .head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.tile-events .eyebrow   { color: var(--blue); }
+.tile-payments .eyebrow { color: var(--amber); }
+.count-chip {
+  font-size: 10.5px; font-weight: 800; padding: 3px 8px; border-radius: 999px;
+  background: var(--blue-soft); color: var(--blue);
 }
 .datechip {
-  width: 54px; height: 54px; border-radius: 16px; background: var(--surface);
+  width: 52px; height: 52px; border-radius: 15px; background: var(--blue-soft);
   display: flex; flex-direction: column; align-items: center; justify-content: center;
-  box-shadow: 0 2px 6px rgba(43,37,64,0.08); flex-shrink: 0; font-family: var(--display);
+  font-family: var(--display); margin: 16px 0 12px;
 }
 .datechip .mon { font-weight: 700; font-size: 10px; letter-spacing: 0.5px; color: var(--pink); text-transform: uppercase; }
-.datechip .day { font-weight: 700; font-size: 22px; line-height: 1; }
-.event-head .eyebrow { color: var(--blue); }
-.event-next {
-  display: flex; align-items: center; gap: 12px;
-  padding: 12px 16px; border-top: 1px solid var(--line-soft);
-  font-size: 13px; font-weight: 700; color: var(--ink-2);
-}
-.event-next .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--pink); flex-shrink: 0; }
+.datechip .day { font-weight: 700; font-size: 21px; line-height: 1; }
+.tile h3 { font-family: var(--display); font-weight: 600; font-size: 16px; line-height: 1.25; }
+.tile .foot { margin-top: auto; padding-top: 12px; font-size: 12px; font-weight: 800; color: var(--violet); }
 
-/* 3 — USEFUL LINKS ------------------------------------------------------- */
-.links { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 14px; }
+.amount { font-family: var(--display); font-weight: 600; font-size: 30px; margin: 18px 0 2px; }
+.due { font-size: 12.5px; font-weight: 700; color: #B08A4E; }
+.fee-line {
+  display: flex; justify-content: space-between; gap: 8px; margin-top: 9px;
+  font-size: 12px; font-weight: 700; color: #8A7658;
+}
+.tile-payments .btn { margin-top: auto; }
+
+/* === 3 — USEFUL LINKS ==================================================== */
+.links { display: grid; grid-template-columns: repeat(4, 1fr); gap: 9px; }
 .link-tile {
-  background: var(--surface); border-radius: 18px; padding: 14px 8px 12px;
+  background: var(--surface); border-radius: 17px; padding: 12px 6px 11px;
   box-shadow: var(--shadow-card); text-decoration: none; color: var(--ink);
   display: flex; flex-direction: column; align-items: center; gap: 7px;
   transition: transform 0.12s ease, box-shadow 0.12s ease;
 }
 .link-tile:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(43,37,64,0.10); }
 .link-tile .glyph {
-  width: 40px; height: 40px; border-radius: 13px;
-  display: flex; align-items: center; justify-content: center; font-size: 20px;
+  width: 38px; height: 38px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center; font-size: 19px;
 }
-.link-tile span { font-size: 11.5px; font-weight: 800; text-align: center; line-height: 1.25; }
+.link-tile span { font-size: 10.5px; font-weight: 800; text-align: center; line-height: 1.25; }
 
-/* 4 — FEES AND PAYMENTS -------------------------------------------------- */
-.fees { background: var(--amber-soft); border: 1.5px solid var(--amber-line); border-radius: 22px; margin-bottom: 14px; }
-.fees-head { display: flex; align-items: center; gap: 12px; padding: 15px 16px 13px; }
-.fees-head .glyph {
-  width: 46px; height: 46px; border-radius: var(--r-sm); background: #FFEBCB;
-  display: flex; align-items: center; justify-content: center; font-size: 23px; flex-shrink: 0;
+/* === 4 — EVENTS (wide) =================================================== */
+.card { background: var(--surface); border-radius: var(--r-lg); box-shadow: var(--shadow-card); overflow: hidden; }
+.event-row {
+  display: flex; align-items: center; gap: 12px; padding: 13px 16px;
+  text-decoration: none; color: var(--ink);
 }
-.fees-head .eyebrow { color: var(--amber); }
-.fees-head .amount { font-family: var(--display); font-weight: 600; font-size: 19px; margin-top: 1px; }
-.fees-head .due { font-size: 12.5px; font-weight: 700; color: #B08A4E; margin-top: 1px; }
-.fees-rows { border-top: 1px solid var(--amber-line); padding: 6px 16px 8px; }
-.fee-row {
-  display: flex; align-items: center; justify-content: space-between; gap: 10px;
-  padding: 9px 0; font-size: 13.5px; font-weight: 700; color: #8A7658;
+.event-row + .event-row { border-top: 1px solid var(--line-soft); }
+.event-row:hover { background: #FCFAFF; }
+.event-row .when {
+  width: 46px; flex-shrink: 0; text-align: center; font-family: var(--display);
+  border-radius: 13px; padding: 7px 0; background: var(--violet-soft);
 }
-.fee-row + .fee-row { border-top: 1px solid rgba(246,226,192,0.7); }
-.fee-row .val { font-weight: 800; color: var(--ink); }
-.pill {
-  font-size: 10.5px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.4px;
-  padding: 3px 8px; border-radius: 999px;
-}
-.pill-paid { background: var(--green-soft); color: var(--green); }
-.pill-due  { background: #FFEBCB; color: var(--amber); }
-.fees .btn-row { padding: 4px 16px 15px; }
+.event-row .when .m { display: block; font-size: 9.5px; font-weight: 700; letter-spacing: 0.4px; color: var(--pink); text-transform: uppercase; }
+.event-row .when .d { display: block; font-size: 18px; font-weight: 700; line-height: 1.05; }
+.event-row .title { font-family: var(--display); font-weight: 600; font-size: 15px; }
+.event-row .chev { color: var(--ink-3); font-size: 18px; }
 
-/* 5 — BLOG AND CHAT ------------------------------------------------------ */
-.duo { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
-.duo-card {
-  position: relative; background: var(--surface); border-radius: 22px; overflow: hidden;
-  box-shadow: var(--shadow-card); text-decoration: none; color: var(--ink);
-  display: flex; flex-direction: column;
-  transition: transform 0.12s ease, box-shadow 0.12s ease;
+/* === 5 — CHILDREN FEED (wide) ============================================ */
+.post { display: flex; gap: 12px; padding: 14px 16px; }
+.post + .post { border-top: 1px solid var(--line-soft); }
+.post img.thumb { width: 62px; height: 62px; border-radius: 15px; object-fit: cover; flex-shrink: 0; }
+.post .who { display: flex; align-items: center; gap: 6px; }
+.post .who .name { font-size: 13px; font-weight: 800; }
+.post .who .tag {
+  font-size: 9.5px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.4px;
+  padding: 2px 6px; border-radius: 999px; background: var(--green-soft); color: var(--green);
 }
-.duo-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(43,37,64,0.10); }
-.duo-card img { width: 100%; height: 84px; object-fit: cover; display: block; }
-.duo-body { padding: 11px 13px 14px; }
-.duo-body .eyebrow { color: var(--violet); }
-.duo-body .h { font-family: var(--display); font-weight: 600; font-size: 14.5px; margin-top: 3px; line-height: 1.3; }
-.duo-body .s { font-size: 11.5px; font-weight: 700; color: var(--ink-3); margin-top: 4px; }
-.chat-face {
-  height: 84px; background: linear-gradient(135deg, var(--green-soft), #EAF4FC);
-  display: flex; align-items: center; justify-content: center; font-size: 34px;
-}
-.badge {
-  position: absolute; top: 10px; right: 10px; min-width: 20px; height: 20px; padding: 0 6px;
-  border-radius: 10px; background: var(--pink); color: #fff;
-  font-size: 11px; font-weight: 800; border: 1.5px solid var(--surface);
-  display: flex; align-items: center; justify-content: center;
-}
+.post p { font-size: 13px; font-weight: 600; color: var(--ink-2); margin-top: 4px; line-height: 1.4; }
+.post .time { font-size: 11px; font-weight: 700; color: var(--ink-3); margin-top: 5px; }
 
 /* --- tab bar ------------------------------------------------------------ */
 .tabbar {
@@ -239,11 +235,16 @@ body {
   flex: 1; background: none; border: none; cursor: pointer; padding: 4px 0;
   display: flex; flex-direction: column; align-items: center; gap: 3px;
   font-family: var(--body); font-weight: 800; font-size: 10.5px; color: var(--ink-3);
-  text-decoration: none;
+  text-decoration: none; position: relative;
 }
 .tab .ico { font-size: 22px; filter: grayscale(1) opacity(0.45); }
 .tab.is-active { color: var(--ink); }
 .tab.is-active .ico { filter: none; }
+.tab .badge {
+  position: absolute; top: -2px; right: 18px; min-width: 17px; height: 17px; padding: 0 4px;
+  border-radius: 9px; background: var(--pink); color: #fff; font-size: 10px; font-weight: 800;
+  border: 1.5px solid var(--surface); display: flex; align-items: center; justify-content: center;
+}
 .tab-fab {
   width: 56px; height: 56px; border-radius: 50%; margin-top: -22px;
   background: linear-gradient(150deg, var(--green-lift), var(--green));
@@ -283,101 +284,115 @@ body {
 
   <header class="header">
     <div>
-      <div class="greeting">Good morning</div>
-      <h1>Hi, Maya 👋</h1>
+      <div class="greeting">Good morning,</div>
+      <h1>Maya!</h1>
     </div>
     <img class="avatar" src="assets/avatarParker.jpg" alt="Your profile">
   </header>
 
   <main class="feed">
 
-    <!-- 1 — BANNER ANNOUNCEMENT ------------------------------------------ -->
-    <section class="banner" id="banner">
-      <span class="bell">📣</span>
-      <div style="flex:1;min-width:0">
-        <div class="eyebrow">Announcement</div>
-        <p>Little Sprouts is closed <strong>Monday 26 May</strong> for staff training. Normal hours resume Tuesday.</p>
-      </div>
-      <button class="dismiss" data-dismiss="banner" aria-label="Dismiss announcement">✕</button>
-    </section>
+    <!-- 1 — ANNOUNCEMENTS AND UPCOMING EVENTS (stacked, dismissible) ------ -->
+    <section class="stack" id="stack">
+      <div class="peek is-second" data-peek="2"></div>
+      <div class="peek" data-peek="1"></div>
 
-    <!-- 2 — EVENTS ANNOUNCEMENT ------------------------------------------ -->
-    <div class="section-label">Events <a href="#">View calendar ›</a></div>
-    <section class="card" id="event">
-      <div class="event-head">
-        <div class="datechip"><span class="mon">May</span><span class="day">17</span></div>
+      <article class="ann" id="ann">
+        <span class="glyph" data-ann-glyph>📣</span>
         <div style="flex:1;min-width:0">
-          <div class="eyebrow">📅 Upcoming event</div>
-          <div class="title-md">Spring Family Picnic 🧺</div>
-          <div class="meta">Sat · 11:00 AM · Sunflower Garden</div>
+          <div class="eyebrow" data-ann-kind>Announcement</div>
+          <h3 data-ann-title>Closed Monday 26 May</h3>
+          <p data-ann-body>Little Sprouts is closed for staff training. Normal hours resume Tuesday.</p>
         </div>
-        <button class="dismiss" data-dismiss="event" aria-label="Dismiss event">✕</button>
-      </div>
-      <div class="btn-row">
-        <button class="btn btn-primary" data-rsvp>📅 Add to calendar</button>
-        <button class="btn btn-ghost">See details ›</button>
-      </div>
-      <div class="event-next">
-        <span class="dot"></span>
-        <span style="flex:1">Next: Sports Day · Fri 30 May</span>
-        <span style="color:var(--violet)">›</span>
-      </div>
+        <button class="dismiss" id="annDismiss" aria-label="Dismiss">✕</button>
+      </article>
     </section>
+    <div class="dots" id="annDots" aria-hidden="true"></div>
+
+    <!-- 2 — UPCOMING EVENTS / DUE PAYMENTS ------------------------------- -->
+    <div class="two-up">
+      <a class="tile tile-events" href="#events">
+        <div class="head">
+          <span class="eyebrow">Upcoming</span>
+          <span class="count-chip">3</span>
+        </div>
+        <div class="datechip"><span class="mon">May</span><span class="day">17</span></div>
+        <!-- No trailing emoji here: at this width it wraps onto a line of its own. -->
+        <h3>Spring Family Picnic</h3>
+        <div class="meta" style="margin-top:4px">Sat · 11:00 AM</div>
+        <div class="foot">See all events ›</div>
+      </a>
+
+      <div class="tile tile-payments">
+        <div class="head"><span class="eyebrow">Due payments</span><span>💳</span></div>
+        <div class="amount">$480</div>
+        <div class="due">Due Friday, 9 May</div>
+        <div class="fee-line"><span>May tuition</span><span>$420</span></div>
+        <div class="fee-line" style="padding-bottom:12px"><span>Lunch club</span><span>$60</span></div>
+        <button class="btn btn-amber">Pay now</button>
+      </div>
+    </div>
 
     <!-- 3 — USEFUL LINKS -------------------------------------------------- -->
-    <div class="section-label">Useful links</div>
+    <div class="section-label"><h2>Useful links</h2></div>
     <nav class="links">
       <a class="link-tile" href="#"><span class="glyph" style="background:var(--blue-soft)">🗓️</span><span>Term dates</span></a>
       <a class="link-tile" href="#"><span class="glyph" style="background:var(--green-soft)">🍎</span><span>Menus</span></a>
-      <a class="link-tile" href="#"><span class="glyph" style="background:var(--violet-soft)">📄</span><span>Policies</span></a>
-      <a class="link-tile" href="#"><span class="glyph" style="background:var(--pink-soft)">🤒</span><span>Report absence</span></a>
-      <a class="link-tile" href="#"><span class="glyph" style="background:#FFF0DE">👕</span><span>Uniform shop</span></a>
-      <a class="link-tile" href="#"><span class="glyph" style="background:#EFEAF8">🏫</span><span>Contact us</span></a>
+      <a class="link-tile" href="#"><span class="glyph" style="background:var(--pink-soft)">🤒</span><span>Absence</span></a>
+      <a class="link-tile" href="#"><span class="glyph" style="background:var(--violet-soft)">⋯</span><span>More</span></a>
     </nav>
 
-    <!-- 4 — FEES AND PAYMENTS --------------------------------------------- -->
-    <div class="section-label">Fees &amp; payments</div>
-    <section class="fees">
-      <div class="fees-head">
-        <span class="glyph">💳</span>
-        <div style="flex:1;min-width:0">
-          <div class="eyebrow">Balance due</div>
-          <div class="amount">$480.00</div>
-          <div class="due">Due Friday, 9 May</div>
-        </div>
-      </div>
-      <div class="fees-rows">
-        <div class="fee-row"><span>May tuition</span><span class="val">$420.00 <span class="pill pill-due">Due</span></span></div>
-        <div class="fee-row"><span>Lunch club · 12 days</span><span class="val">$60.00 <span class="pill pill-due">Due</span></span></div>
-        <div class="fee-row"><span>April tuition</span><span class="val">$420.00 <span class="pill pill-paid">Paid</span></span></div>
-      </div>
-      <div class="btn-row">
-        <button class="btn btn-amber" style="flex:1.4">Pay now</button>
-        <button class="btn btn-ghost">Statements</button>
-      </div>
+    <!-- ---------------- fold sits about here ----------------------------- -->
+
+    <!-- 4 — EVENTS -------------------------------------------------------- -->
+    <div class="section-label" id="events"><h2>Events</h2><a href="#">Calendar ›</a></div>
+    <section class="card">
+      <a class="event-row" href="#">
+        <span class="when"><span class="m">May</span><span class="d">17</span></span>
+        <span style="flex:1;min-width:0">
+          <span class="title">Spring Family Picnic 🧺</span>
+          <div class="meta">Sat · 11:00 AM · Sunflower Garden</div>
+        </span>
+        <span class="chev">›</span>
+      </a>
+      <a class="event-row" href="#">
+        <span class="when"><span class="m">May</span><span class="d">30</span></span>
+        <span style="flex:1;min-width:0">
+          <span class="title">Sports Day 🏃</span>
+          <div class="meta">Fri · 9:30 AM · Main field</div>
+        </span>
+        <span class="chev">›</span>
+      </a>
+      <a class="event-row" href="#">
+        <span class="when"><span class="m">Jun</span><span class="d">04</span></span>
+        <span style="flex:1;min-width:0">
+          <span class="title">Parent evening 🌙</span>
+          <div class="meta">Wed · 4:00 PM · Sunflower Room</div>
+        </span>
+        <span class="chev">›</span>
+      </a>
     </section>
 
-    <!-- 5 — BLOG AND CHAT -------------------------------------------------- -->
-    <div class="section-label">Stay in touch</div>
-    <div class="duo">
-      <a class="duo-card" href="#">
-        <img src="assets/p01.jpg" alt="">
-        <div class="duo-body">
-          <div class="eyebrow">Blog</div>
-          <div class="h">Our welly walk in pictures</div>
-          <div class="s">Ms. Parker · 2h ago</div>
+    <!-- 5 — CHILDREN FEED ------------------------------------------------- -->
+    <div class="section-label"><h2>Children feed</h2><a href="index.html">Open feed ›</a></div>
+    <section class="card">
+      <article class="post">
+        <img class="thumb" src="assets/p01.jpg" alt="">
+        <div style="flex:1;min-width:0">
+          <div class="who"><span class="name">Ms. Parker</span><span class="tag">Teacher</span></div>
+          <p>Sensory bins were a huge hit today! We scooped, poured and explored rice and beans.</p>
+          <div class="time">Emma · 2h ago</div>
         </div>
-      </a>
-      <a class="duo-card" href="#">
-        <span class="badge">2</span>
-        <div class="chat-face">💬</div>
-        <div class="duo-body">
-          <div class="eyebrow">Chat</div>
-          <div class="h">Messages</div>
-          <div class="s">Ms. Parker · 8:15 AM</div>
+      </article>
+      <article class="post">
+        <img class="thumb" src="assets/p02.jpg" alt="">
+        <div style="flex:1;min-width:0">
+          <div class="who"><span class="name">Mr. Diaz</span><span class="tag">Teacher</span></div>
+          <p>Liam led clean-up time and did a wonderful job keeping everyone on track 🎶</p>
+          <div class="time">Liam · Yesterday</div>
         </div>
-      </a>
-    </div>
+      </article>
+    </section>
 
   </main>
 
@@ -387,7 +402,7 @@ body {
     <div style="flex:1;display:flex;justify-content:center">
       <button class="tab-fab" aria-label="Create">＋</button>
     </div>
-    <a class="tab" href="index.html"><span class="ico">💬</span><span>Chat</span></a>
+    <a class="tab" href="index.html"><span class="badge">2</span><span class="ico">💬</span><span>Chat</span></a>
     <a class="tab" href="index.html"><span class="ico">📅</span><span>Calendar</span></a>
   </nav>
 
@@ -395,24 +410,61 @@ body {
 </div>
 
 <script>
-  // Dismissible cards. Any [data-dismiss="x"] hides the element with id="x".
-  document.querySelectorAll('[data-dismiss]').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      var target = document.getElementById(btn.dataset.dismiss);
-      if (target) target.hidden = true;
+(function () {
+  // The stack cycles through these; dismissing reveals the next one, and the
+  // peeking layers retract to match what is still queued.
+  var items = [
+    { kind: 'Announcement',   glyph: '📣', title: 'Closed Monday 26 May',
+      body: 'Little Sprouts is closed for staff training. Normal hours resume Tuesday.' },
+    { kind: 'Upcoming event', glyph: '🧺', title: 'Spring Family Picnic',
+      body: 'Sat 17 May, 11:00 AM at Sunflower Garden. Bring a blanket and a picnic to share.' },
+    { kind: 'Announcement',   glyph: '🧴', title: 'Sun cream and hats',
+      body: 'Outdoor play starts next week — please send a named hat and apply sun cream at home.' }
+  ];
+
+  var i = 0;
+  var stack  = document.getElementById('stack');
+  var dotsEl = document.getElementById('annDots');
+  var field  = {
+    kind:  document.querySelector('[data-ann-kind]'),
+    glyph: document.querySelector('[data-ann-glyph]'),
+    title: document.querySelector('[data-ann-title]'),
+    body:  document.querySelector('[data-ann-body]')
+  };
+
+  function render() {
+    var remaining = items.length - i;
+    if (remaining <= 0) {                 // queue empty — retire the whole block
+      stack.hidden = true;
+      dotsEl.hidden = true;
+      return;
+    }
+
+    var item = items[i];
+    field.kind.textContent  = item.kind;
+    field.glyph.textContent = item.glyph;
+    field.title.textContent = item.title;
+    field.body.textContent  = item.body;
+
+    // Show one peek per queued item behind the current card, max two.
+    stack.querySelector('[data-peek="1"]').hidden = remaining < 2;
+    stack.querySelector('[data-peek="2"]').hidden = remaining < 3;
+
+    dotsEl.innerHTML = '';
+    items.forEach(function (_, n) {
+      var d = document.createElement('span');
+      d.className = 'dot' + (n === i ? ' is-on' : '');
+      dotsEl.appendChild(d);
     });
+  }
+
+  document.getElementById('annDismiss').addEventListener('click', function () {
+    i += 1;
+    render();
   });
 
-  // Calendar toggle — swaps label and intent in place.
-  document.querySelectorAll('[data-rsvp]').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      var added = btn.dataset.added === '1';
-      btn.dataset.added = added ? '0' : '1';
-      btn.textContent = added ? '📅 Add to calendar' : '✓ Added to calendar';
-      btn.classList.toggle('btn-primary', added);
-      btn.classList.toggle('btn-ghost', !added);
-    });
-  });
+  render();
+})();
 </script>
 
 </body>

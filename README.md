@@ -36,9 +36,21 @@ public/fonts/fonts.css   hand-authored — latin @font-face rules for it
 ## Dashboard
 
 `public/dashboard.html` is a scaffold for a parent home screen, at
-http://localhost:4173/dashboard.html. It holds five widgets: a dismissible
-announcement banner, an events card, a useful-links grid, a fees and payments
-summary, and blog/chat entry points.
+http://localhost:4173/dashboard.html. It follows a wireframe, top to bottom:
+
+| Block | Notes |
+| --- | --- |
+| Greeting + avatar | Two lines — "Good morning," then the name |
+| Announcements and upcoming events | A stack, one card at a time; the layers peeking below stand for what is queued, and retract as it empties |
+| Upcoming events · Due payments | Two-up row of tall cards |
+| Useful links | Four tiles — three plus a "More" |
+| *fold* | Everything above fits a 402×874 phone without scrolling |
+| Events | Full-width list |
+| Children feed | Full-width list |
+
+The announcement stack is driven by the `items` array in the script at the
+bottom of the file — add or remove entries there and the dots and peeking
+layers follow automatically.
 
 It is deliberately *not* built on the DC runtime. `index.html` is generated
 output — 3,500 lines of inline styles and `{{ }}` bindings — so editing it by
