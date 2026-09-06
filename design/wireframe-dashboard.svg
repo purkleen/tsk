@@ -1,0 +1,188 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="470" height="1124" viewBox="0 0 470 1124" font-family="Nunito, Inter, sans-serif">
+<title>TSK dashboard wireframe — BSK palette</title>
+<desc>Parent home screen. Order: announcement stack, upcoming events / due payments, useful links, fold, children feed, events. The 402pt screen column sits at x=34 with an annotation gutter to its left.</desc>
+
+<!-- BSK palette
+     Mark         #5F2E8C purple   #FFD200 yellow
+     Secondary    #6946C9 violet   #FFDC4A yellow light
+     Illustration #5921F5 blue  #42B6D1 teal    #BCE5F1 pale
+                  #F15A28 orange #D81D9E magenta #E14372 pink
+
+     Contrast drives the assignments: #FFD200 is 1.45:1 on white, so it is only
+     ever a fill under dark ink (#2E2545 on it = 9.87:1) — never white text on
+     yellow. Purple 9.31:1 and violet 6.33:1 carry type. Teal and pale blue are
+     2.37:1 and 1.34:1, so they are tints behind icons only, never text. -->
+
+<defs>
+  <linearGradient id="annFill" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#F1ECFA"/><stop offset="1" stop-color="#E8F4FA"/>
+  </linearGradient>
+  <style>
+    .lbl   { font-size: 10px;   font-weight: 800; letter-spacing: .6px; text-transform: uppercase; }
+    .h1    { font-size: 26px;   font-weight: 700; fill: #5F2E8C; }
+    .h2    { font-size: 17px;   font-weight: 700; fill: #5F2E8C; }
+    .h3    { font-size: 15px;   font-weight: 700; fill: #2E2545; }
+    .body  { font-size: 12px;   font-weight: 600; fill: #6B6480; }
+    .small { font-size: 10.5px; font-weight: 700; fill: #8A83A0; }
+    .link  { font-size: 11px;   font-weight: 800; fill: #6946C9; }
+    .bar   { fill: #E4E0EC; }
+  </style>
+</defs>
+
+<rect width="470" height="1124" fill="#FAF8FC"/>
+
+<!-- The 402pt phone column. Everything inside is in screen coordinates. -->
+<g id="screen" transform="translate(34,0)">
+
+  <!-- ══ HEADER ════════════════════════════════════════════════════════ -->
+  <g id="header">
+    <text x="16" y="46" class="body">Good morning,</text>
+    <text x="16" y="74" class="h1">Maya!</text>
+    <circle cx="362" cy="58" r="24" fill="#F1ECFA" stroke="#D8CEE9"/>
+    <text x="362" y="55" class="small" text-anchor="middle" fill="#6946C9">Person’s</text>
+    <text x="362" y="66" class="small" text-anchor="middle" fill="#6946C9">avatar</text>
+  </g>
+
+  <!-- ══ 1 · ANNOUNCEMENT STACK ════════════════════════════════════════ -->
+  <!-- Painted back to front: the deepest queued card first, the live one last. -->
+  <g id="announcement-stack">
+    <rect x="44" y="220" width="314" height="38" rx="19" fill="#FFFFFF" stroke="#E4E0EC"/>
+    <rect x="30" y="208" width="342" height="32" rx="16" fill="#FFFFFF" stroke="#E4E0EC"/>
+
+    <rect x="16" y="96" width="370" height="122" rx="20" fill="url(#annFill)" stroke="#D8CEE9" stroke-width="1.5"/>
+    <circle cx="360" cy="118" r="13" fill="#FFFFFF" stroke="#E4E0EC"/>
+    <path d="M356 114 l8 8 M364 114 l-8 8" stroke="#6B6480" stroke-width="1.6" stroke-linecap="round"/>
+
+    <circle cx="42" cy="124" r="14" fill="#FFD200"/>
+    <text x="42" y="129" font-size="14" text-anchor="middle">📣</text>
+
+    <text x="66" y="121" class="lbl" fill="#6946C9">Announcement</text>
+    <text x="66" y="142" class="h3">Announcements and</text>
+    <text x="66" y="160" class="h3">upcoming events</text>
+    <rect x="66" y="172" width="250" height="7" rx="3.5" class="bar"/>
+    <rect x="66" y="185" width="196" height="7" rx="3.5" class="bar"/>
+
+    <g id="stack-dots">
+      <rect x="181" y="274" width="18" height="6" rx="3" fill="#5F2E8C"/>
+      <circle cx="207" cy="277" r="3" fill="#D8CEE9"/>
+      <circle cx="217" cy="277" r="3" fill="#D8CEE9"/>
+    </g>
+  </g>
+
+  <!-- ══ 2 · UPCOMING EVENTS · DUE PAYMENTS ════════════════════════════ -->
+  <g id="upcoming-events">
+    <rect x="16" y="296" width="179" height="222" rx="20" fill="#FFFFFF" stroke="#E4E0EC"/>
+    <text x="32" y="320" class="lbl" fill="#1F6B80">Upcoming</text>
+    <rect x="150" y="309" width="29" height="16" rx="8" fill="#BCE5F1"/>
+    <text x="164.5" y="321" class="small" text-anchor="middle" fill="#1F6B80">3</text>
+
+    <rect x="32" y="334" width="52" height="52" rx="15" fill="#BCE5F1"/>
+    <text x="58" y="352" class="lbl" text-anchor="middle" fill="#E14372">May</text>
+    <text x="58" y="374" font-size="19" font-weight="700" text-anchor="middle" fill="#2E2545">17</text>
+
+    <text x="32" y="408" class="h3">Upcoming</text>
+    <text x="32" y="426" class="h3">events</text>
+    <rect x="32" y="438" width="112" height="7" rx="3.5" class="bar"/>
+    <text x="32" y="494" class="link">See all events ›</text>
+  </g>
+
+  <g id="due-payments">
+    <rect x="207" y="296" width="179" height="222" rx="20" fill="#FFF9E0" stroke="#FFDC4A" stroke-width="1.5"/>
+    <text x="223" y="320" class="lbl" fill="#9A6B00">Due payments</text>
+    <circle cx="366" cy="316" r="12" fill="#FFD200"/>
+    <text x="366" y="321" font-size="11" text-anchor="middle">💳</text>
+
+    <text x="223" y="364" font-size="27" font-weight="700" fill="#5F2E8C">$480</text>
+    <text x="223" y="382" class="small" fill="#9A6B00">Due Friday, 9 May</text>
+    <rect x="223" y="396" width="146" height="7" rx="3.5" class="bar"/>
+    <rect x="223" y="411" width="120" height="7" rx="3.5" class="bar"/>
+
+    <!-- Yellow CTA carries dark ink, never white -->
+    <rect x="223" y="460" width="146" height="40" rx="14" fill="#FFD200"/>
+    <text x="296" y="485" font-size="13.5" font-weight="800" text-anchor="middle" fill="#2E2545">Pay now</text>
+  </g>
+
+  <!-- ══ 3 · USEFUL LINKS ══════════════════════════════════════════════ -->
+  <g id="useful-links">
+    <text x="16" y="560" class="h2">Useful links</text>
+
+    <rect x="16"    y="576" width="85.75" height="88" rx="17" fill="#FFFFFF" stroke="#E4E0EC"/>
+    <rect x="110.7" y="576" width="85.75" height="88" rx="17" fill="#FFFFFF" stroke="#E4E0EC"/>
+    <rect x="205.5" y="576" width="85.75" height="88" rx="17" fill="#FFFFFF" stroke="#E4E0EC"/>
+    <rect x="300.2" y="576" width="85.75" height="88" rx="17" fill="#FFFFFF" stroke="#E4E0EC"/>
+
+    <rect x="42"    y="592" width="34" height="34" rx="11" fill="#BCE5F1"/>
+    <rect x="136.7" y="592" width="34" height="34" rx="11" fill="#FFDC4A"/>
+    <rect x="231.5" y="592" width="34" height="34" rx="11" fill="#F6D4EE"/>
+    <rect x="326.2" y="592" width="34" height="34" rx="11" fill="#E5DEF8"/>
+
+    <text x="58.8"  y="642" class="small" text-anchor="middle" fill="#2E2545">Useful</text>
+    <text x="58.8"  y="654" class="small" text-anchor="middle" fill="#2E2545">link 1</text>
+    <text x="153.5" y="642" class="small" text-anchor="middle" fill="#2E2545">Useful</text>
+    <text x="153.5" y="654" class="small" text-anchor="middle" fill="#2E2545">link 2</text>
+    <text x="248.3" y="642" class="small" text-anchor="middle" fill="#2E2545">Useful</text>
+    <text x="248.3" y="654" class="small" text-anchor="middle" fill="#2E2545">link 3</text>
+    <text x="343"   y="642" class="small" text-anchor="middle" fill="#2E2545">More</text>
+    <text x="343"   y="654" class="small" text-anchor="middle" fill="#2E2545">…</text>
+  </g>
+
+  <!-- ══ 4 · CHILDREN FEED ═════════════════════════════════════════════ -->
+  <g id="children-feed">
+    <text x="16"  y="700" class="h2">Children feed</text>
+    <text x="386" y="700" class="link" text-anchor="end">Open feed ›</text>
+
+    <rect x="16" y="716" width="370" height="172" rx="22" fill="#FFFFFF" stroke="#E4E0EC"/>
+
+    <rect x="32" y="736" width="58" height="58" rx="15" fill="#BCE5F1"/>
+    <rect x="102" y="740" width="86" height="9" rx="4.5" fill="#5F2E8C"/>
+    <rect x="196" y="740" width="52" height="9" rx="4.5" fill="#D9F0E4"/>
+    <rect x="102" y="758" width="252" height="7" rx="3.5" class="bar"/>
+    <rect x="102" y="771" width="214" height="7" rx="3.5" class="bar"/>
+    <rect x="102" y="786" width="96"  height="6" rx="3" fill="#EDEAF3"/>
+
+    <line x1="32" y1="812" x2="370" y2="812" stroke="#F0EDF5"/>
+
+    <rect x="32" y="826" width="58" height="58" rx="15" fill="#F7D9CE"/>
+    <rect x="102" y="830" width="74" height="9" rx="4.5" fill="#5F2E8C"/>
+    <rect x="184" y="830" width="52" height="9" rx="4.5" fill="#D9F0E4"/>
+    <rect x="102" y="848" width="238" height="7" rx="3.5" class="bar"/>
+    <rect x="102" y="861" width="188" height="7" rx="3.5" class="bar"/>
+    <rect x="102" y="876" width="96"  height="6" rx="3" fill="#EDEAF3"/>
+  </g>
+
+  <!-- ══ 5 · EVENTS ════════════════════════════════════════════════════ -->
+  <g id="events">
+    <text x="16"  y="928" class="h2">Events</text>
+    <text x="386" y="928" class="link" text-anchor="end">Calendar ›</text>
+
+    <rect x="16" y="944" width="370" height="164" rx="22" fill="#FFFFFF" stroke="#E4E0EC"/>
+
+    <rect x="32" y="960" width="44" height="44" rx="13" fill="#E5DEF8"/>
+    <text x="54" y="976" class="lbl" text-anchor="middle" fill="#E14372">May</text>
+    <text x="54" y="995" font-size="16" font-weight="700" text-anchor="middle" fill="#2E2545">17</text>
+    <rect x="88" y="966" width="150" height="9" rx="4.5" fill="#2E2545"/>
+    <rect x="88" y="984" width="204" height="7" rx="3.5" class="bar"/>
+    <text x="370" y="990" class="h3" text-anchor="end" fill="#8A83A0">›</text>
+
+    <line x1="32" y1="1020" x2="370" y2="1020" stroke="#F0EDF5"/>
+
+    <rect x="32" y="1034" width="44" height="44" rx="13" fill="#E5DEF8"/>
+    <text x="54" y="1050" class="lbl" text-anchor="middle" fill="#E14372">May</text>
+    <text x="54" y="1069" font-size="16" font-weight="700" text-anchor="middle" fill="#2E2545">30</text>
+    <rect x="88" y="1040" width="112" height="9" rx="4.5" fill="#2E2545"/>
+    <rect x="88" y="1058" width="176" height="7" rx="3.5" class="bar"/>
+    <text x="370" y="1064" class="h3" text-anchor="end" fill="#8A83A0">›</text>
+  </g>
+
+</g>
+
+<!-- ══ FOLD MARKER ═════════════════════════════════════════════════════ -->
+<!-- Sits outside the screen column, in the annotation gutter, so it never
+     collides with the content it is measuring. -->
+<g id="fold-marker">
+  <line x1="0" y1="760" x2="470" y2="760" stroke="#5F2E8C" stroke-width="1.25" stroke-dasharray="5 4"/>
+  <rect x="2" y="746" width="40" height="21" rx="7" fill="#5F2E8C"/>
+  <text x="22" y="761" font-size="11" font-weight="800" text-anchor="middle" fill="#FFFFFF">fold</text>
+</g>
+
+</svg>
