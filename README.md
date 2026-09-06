@@ -45,8 +45,8 @@ http://localhost:4173/dashboard.html. It follows a wireframe, top to bottom:
 | Upcoming events · Due payments | Two-up row of tall cards |
 | Useful links | Four tiles — three plus a "More" |
 | *fold* | Everything above fits a 402×874 phone without scrolling |
-| Events | Full-width list |
 | Children feed | Full-width list |
+| Events | Full-width list |
 
 The announcement stack is driven by the `items` array in the script at the
 bottom of the file — add or remove entries there and the dots and peeking
